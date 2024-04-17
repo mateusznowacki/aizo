@@ -12,7 +12,7 @@ public:
     void printArray(T arr[], int size) {
         cout << "[";
         for (int i = 0; i < size; ++i) {
-            cout << arr[i];
+            cout << fixed<<arr[i];
             if (i < size - 1)
                 cout << ", ";
         }
@@ -90,6 +90,28 @@ public:
             cout << "Tablica zostala posortowana poprawnie" << endl;
         } else {
             cout << "Tablica nie jest posortowana poprawnie" << endl;
+        }
+    }
+
+    bool askIfPrintArray() {
+        cout << "Czy chcesz wyswietlic tablice przed i po sortowaniu?  1-tak 0-nie" << endl;
+        int choice;
+        cin >> choice;
+        if (choice == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    bool askIfWantToCheckOtherAlgorithm() {
+        cout << "Czy chcesz sprawdzic inny algorytm sortowania? 1-tak 0-nie" << endl;
+        int choice;
+        cin >> choice;
+        if (choice == 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 };

@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "ConsoleManager.h"
 #include "Controller.h"
 #include "AutoPerformanceTester.h"

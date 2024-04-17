@@ -32,33 +32,35 @@ public:
         string filename = console.printGetFilename();
         int type = console.getTypeOptions();
         int algorithmType = console.printSortingAlgorithmsOptions();
+        bool printArray = console.askIfPrintArray();
 
         switch (type) {
             case 1: {
                 int *intArray = fileManager.getArrayFromFile<int>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<int>(intArray, size, algorithmType);
+                runSortingAlgorithmVerification<int>(intArray, size, algorithmType, printArray);
+
                 delete[] intArray;
                 break;
             }
             case 2: {
                 double *doubleArray = fileManager.getArrayFromFile<double>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<double>(doubleArray, size, algorithmType);
+                runSortingAlgorithmVerification<double>(doubleArray, size, algorithmType, printArray);
                 delete[] doubleArray;
                 break;
             }
             case 3: {
                 float *floatArray = fileManager.getArrayFromFile<float>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<float>(floatArray, size, algorithmType);
+                runSortingAlgorithmVerification<float>(floatArray, size, algorithmType, printArray);
                 delete[] floatArray;
                 break;
             }
             case 4: {
                 char *charArray = fileManager.getArrayFromFile<char>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<char>(charArray, size, algorithmType);
+                runSortingAlgorithmVerification<char>(charArray, size, algorithmType, printArray);
                 delete[] charArray;
                 break;
             }
@@ -70,34 +72,82 @@ public:
         int size = console.printGetArraySize();
         int arrayType = console.printSortedArrayType();
         int algorithmType = console.printSortingAlgorithmsOptions();
+        bool printArray = console.askIfPrintArray();
         switch (type) {
             case 1: {
                 int *intArray = getArray<int>(size, arrayType);
-                runSortingAlgorithmVerification<int>(intArray, size, algorithmType);
+                int *intArrayCopy = new int[size];
+
+                copy(intArray, intArray + size, intArrayCopy);
+                runSortingAlgorithmVerification<int>(intArrayCopy, size, algorithmType, printArray);
+                if (console.askIfWantToCheckOtherAlgorithm()) {
+                    copy(intArray, intArray + size, intArrayCopy);
+                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<int>(intArrayCopy, size, otherAlgorithmType, printArray);
+                }
+
+
+                do {
+                    copy(intArray, intArray + size, intArrayCopy);
+                    runSortingAlgorithmVerification<int>(intArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
+
+
                 delete[] intArray;
+                delete[] intArrayCopy;
                 break;
             }
             case 2: {
                 double *doubleArray = getArray<double>(size, arrayType);
-                runSortingAlgorithmVerification<double>(doubleArray, size, algorithmType);
+                double *doubleArrayCopy = new double[size];
+
+                copy(doubleArray, doubleArray + size, doubleArrayCopy);
+                runSortingAlgorithmVerification<double>(doubleArrayCopy, size, algorithmType, printArray);
+                if (console.askIfWantToCheckOtherAlgorithm()) {
+                    copy(doubleArray, doubleArray + size, doubleArrayCopy);
+                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<double>(doubleArrayCopy, size, otherAlgorithmType, printArray);
+                }
+
                 delete[] doubleArray;
+                delete[] doubleArrayCopy;
                 break;
             }
             case 3: {
                 float *floatArray = getArray<float>(size, arrayType);
-                runSortingAlgorithmVerification<float>(floatArray, size, algorithmType);
+                float *floatArrayCopy = new float[size];
+                copy(floatArray, floatArray + size, floatArrayCopy);
+
+                runSortingAlgorithmVerification<float>(floatArrayCopy, size, algorithmType, printArray);
+                if (console.askIfWantToCheckOtherAlgorithm()) {
+                    copy(floatArray, floatArray + size, floatArrayCopy);
+                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<float>(floatArrayCopy, size, otherAlgorithmType, printArray);
+                }
+
                 delete[] floatArray;
+                delete[] floatArrayCopy;
                 break;
             }
             case 4: {
                 char *charArray = getArray<char>(size, arrayType);
-                runSortingAlgorithmVerification<char>(charArray, size, algorithmType);
+                char *charArrayCopy = new char[size];
+
+                copy(charArray, charArray + size, charArrayCopy);
+                runSortingAlgorithmVerification<char>(charArrayCopy, size, algorithmType, printArray);
+                if (console.askIfWantToCheckOtherAlgorithm()) {
+                    copy(charArray, charArray + size, charArrayCopy);
+                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<char>(charArrayCopy, size, otherAlgorithmType, printArray);
+                }
+
                 delete[] charArray;
+                delete[] charArrayCopy;
                 break;
             }
         }
     }
-
 
     template<typename T>
     T *getArray(int size, int arrayType) {
@@ -115,47 +165,47 @@ public:
     }
 
     template<typename T>
-    void runSortingAlgorithmVerification(T *array, int size, int algorithmType) {
+    void runSortingAlgorithmVerification(T *array, int size, int algorithmType, bool printArray) {
         switch (algorithmType) {
             case 1: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.insertionSort(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
             case 2: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.insertionSortBinary(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
             case 3: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.mergeSort(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
             case 4: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.bubbleSort(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
             case 5: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.heapSort(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
             case 6: {
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 algorithm.quickSort(array, size);
-                console.printArray(array, size);
+                printArray ? console.printArray(array, size) : void();
                 console.printIfCorrectlySorted(algorithm.isSorted(array, size));
                 break;
             }
@@ -205,8 +255,6 @@ public:
             }
         }
         chrono::milliseconds duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-        cout << "Sorting time: " << duration.count() << "ms" << endl;
-
         return duration; // Zwróć czas trwania sortowania
     }
 

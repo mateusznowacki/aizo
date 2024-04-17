@@ -45,7 +45,6 @@ public:
                 }
                 delete[] array;
             }
-
         } else if (type == "float") {
             for (int i = 0; i < 7; ++i) {
                 float *array = new float[sizes[i]];
