@@ -7,6 +7,7 @@
 #include "DataGenerator.h"
 #include "FileManager.h"
 
+
 using namespace std;
 
 class Controller {
@@ -31,37 +32,72 @@ public:
     void getDataFromFileAndSort() {
         string filename = console.printGetFilename();
         int type = console.getTypeOptions();
-        int algorithmType = console.printSortingAlgorithmsOptions();
         bool printArray = console.askIfPrintArray();
 
         switch (type) {
             case 1: {
                 int *intArray = fileManager.getArrayFromFile<int>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<int>(intArray, size, algorithmType, printArray);
+                int *intArrayCopy = new int[size];
+
+                do {
+                    copy(intArray, intArray + size, intArrayCopy);
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<int>(intArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
 
                 delete[] intArray;
+                delete[] intArrayCopy;
                 break;
             }
             case 2: {
                 double *doubleArray = fileManager.getArrayFromFile<double>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<double>(doubleArray, size, algorithmType, printArray);
+                double *doubleArrayCopy = new double[size];
+
+                do {
+                    copy(doubleArray, doubleArray + size, doubleArrayCopy);
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<double>(doubleArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
+
                 delete[] doubleArray;
+                delete[] doubleArrayCopy;
                 break;
             }
             case 3: {
                 float *floatArray = fileManager.getArrayFromFile<float>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<float>(floatArray, size, algorithmType, printArray);
+                float *floatArrayCopy = new float[size];
+
+
+                do {
+                    copy(floatArray, floatArray + size, floatArrayCopy);
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<float>(floatArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
+
                 delete[] floatArray;
+                delete[] floatArrayCopy;
                 break;
             }
             case 4: {
                 char *charArray = fileManager.getArrayFromFile<char>(filename);
                 int size = fileManager.getArraySizeFromFile(filename);
-                runSortingAlgorithmVerification<char>(charArray, size, algorithmType, printArray);
+                char *charArrayCopy = new char[size];
+
+                do {
+                    copy(charArray, charArray + size, charArrayCopy);
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<char>(charArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
+
                 delete[] charArray;
+                delete[] charArrayCopy;
                 break;
             }
         }
@@ -71,24 +107,15 @@ public:
         int type = console.getTypeOptions();
         int size = console.printGetArraySize();
         int arrayType = console.printSortedArrayType();
-        int algorithmType = console.printSortingAlgorithmsOptions();
         bool printArray = console.askIfPrintArray();
         switch (type) {
             case 1: {
                 int *intArray = getArray<int>(size, arrayType);
                 int *intArrayCopy = new int[size];
 
-                copy(intArray, intArray + size, intArrayCopy);
-                runSortingAlgorithmVerification<int>(intArrayCopy, size, algorithmType, printArray);
-                if (console.askIfWantToCheckOtherAlgorithm()) {
-                    copy(intArray, intArray + size, intArrayCopy);
-                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
-                    runSortingAlgorithmVerification<int>(intArrayCopy, size, otherAlgorithmType, printArray);
-                }
-
-
                 do {
                     copy(intArray, intArray + size, intArrayCopy);
+                    int algorithmType = console.printSortingAlgorithmsOptions();
                     runSortingAlgorithmVerification<int>(intArrayCopy, size, algorithmType, printArray);
 
                 } while (console.askIfWantToCheckOtherAlgorithm());
@@ -102,13 +129,12 @@ public:
                 double *doubleArray = getArray<double>(size, arrayType);
                 double *doubleArrayCopy = new double[size];
 
-                copy(doubleArray, doubleArray + size, doubleArrayCopy);
-                runSortingAlgorithmVerification<double>(doubleArrayCopy, size, algorithmType, printArray);
-                if (console.askIfWantToCheckOtherAlgorithm()) {
+                do {
                     copy(doubleArray, doubleArray + size, doubleArrayCopy);
-                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
-                    runSortingAlgorithmVerification<double>(doubleArrayCopy, size, otherAlgorithmType, printArray);
-                }
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<double>(doubleArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
 
                 delete[] doubleArray;
                 delete[] doubleArrayCopy;
@@ -117,14 +143,13 @@ public:
             case 3: {
                 float *floatArray = getArray<float>(size, arrayType);
                 float *floatArrayCopy = new float[size];
-                copy(floatArray, floatArray + size, floatArrayCopy);
 
-                runSortingAlgorithmVerification<float>(floatArrayCopy, size, algorithmType, printArray);
-                if (console.askIfWantToCheckOtherAlgorithm()) {
+                do {
                     copy(floatArray, floatArray + size, floatArrayCopy);
-                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
-                    runSortingAlgorithmVerification<float>(floatArrayCopy, size, otherAlgorithmType, printArray);
-                }
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<float>(floatArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
 
                 delete[] floatArray;
                 delete[] floatArrayCopy;
@@ -134,13 +159,12 @@ public:
                 char *charArray = getArray<char>(size, arrayType);
                 char *charArrayCopy = new char[size];
 
-                copy(charArray, charArray + size, charArrayCopy);
-                runSortingAlgorithmVerification<char>(charArrayCopy, size, algorithmType, printArray);
-                if (console.askIfWantToCheckOtherAlgorithm()) {
+                do {
                     copy(charArray, charArray + size, charArrayCopy);
-                    int otherAlgorithmType = console.printSortingAlgorithmsOptions();
-                    runSortingAlgorithmVerification<char>(charArrayCopy, size, otherAlgorithmType, printArray);
-                }
+                    int algorithmType = console.printSortingAlgorithmsOptions();
+                    runSortingAlgorithmVerification<char>(charArrayCopy, size, algorithmType, printArray);
+
+                } while (console.askIfWantToCheckOtherAlgorithm());
 
                 delete[] charArray;
                 delete[] charArrayCopy;
