@@ -114,6 +114,56 @@ public:
             return false;
         }
     }
+
+    void printConfig(string type, int iterations, int *sizes, int algorithm, int arrayType) {
+        cout << "Typ danych: " << type << endl;
+        cout << "Ilosc iteracji: " << iterations << endl;
+        cout << "Rozmiary tablic: ";
+        for (int i = 0; i < 7; ++i) {
+            cout << sizes[i] << " ";
+        }
+        cout << endl;
+
+        switch (algorithm) {
+            case 1:{
+                cout << "Algorytm: Insertion sort" << endl;
+                break;
+            }
+            case 2:{
+                cout << "Algorytm: Binary insertion sort" << endl;
+                break;
+            }
+            case 3:{
+                cout << "Algorytm: Merge sort" << endl;
+                break;
+            }
+            case 4:{
+                cout << "Algorytm: Bubble sort" << endl;
+                break;
+            }
+            case 5:{
+                cout << "Algorytm: Heap sort" << endl;
+                break;
+            }
+            case 6:{
+                cout << "Algorytm: Quick sort" << endl;
+                break;
+            }
+
+        }
+
+        switch (arrayType) {
+            case 1:
+                cout << "Tablica losowa" << endl;
+                break;
+            case 2:
+                cout << "Tablica 1/3 posortowana" << endl;
+                break;
+            case 3:
+                cout << "Tablica 2/3 posortowana" << endl;
+                break;
+        }
+    }
 };
 
 

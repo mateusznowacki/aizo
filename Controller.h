@@ -7,7 +7,6 @@
 #include "DataGenerator.h"
 #include "FileManager.h"
 
-
 using namespace std;
 
 class Controller {

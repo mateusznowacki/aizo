@@ -5,12 +5,16 @@
 #include "FileManager.h"
 #include "ConsoleManager.h"
 #include "Controller.h"
+#include <iostream>
+
+using namespace std;
 
 class AutoPerformanceTester {
 
     FileManager fileManager;
     Controller controller;
     DataGenerator generator;
+    ConsoleManager console;
 
 public:
     void runAutoTests() {
@@ -20,7 +24,8 @@ public:
         int algorithm = stoi(fileManager.getConfigFileAlgorithm());
         int arrayType = stoi(fileManager.getConfigFileArray());
         auto time = chrono::steady_clock::duration::zero();
-        cout << "type: " << type << endl;
+
+        console.printConfig(type,iterations,sizes,algorithm,arrayType);
 
         if (type == "int") {
             for (int i = 0; i < 7; ++i) {
@@ -117,7 +122,9 @@ public:
                 delete[] array;
             }
         }
+        cout << "Testy zakonczone pomyslnie" << endl;
     }
+
 };
 
 #endif //AIZO_SORTOWANIE_AUTOPERFORMANCETESTER_H

@@ -10,6 +10,7 @@ int main() {
     AutoPerformanceTester tester;
     ConsoleManager console;
     Controller controller;
+    DataGenerator generator;
 
     int choice = 0;
     do {
