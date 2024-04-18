@@ -17,6 +17,9 @@ public:
         cout << "Podaj nazwe pliku do ktorego chcesz zapisac tablice: " << endl;
         cin >> filename;
 
+        filename.append(".txt");
+        cout << filename << endl;
+
         // Otwarcie pliku do zapisu
         ofstream outputFile(filename.c_str(), ofstream::trunc);
         if (!outputFile.is_open()) {
@@ -43,7 +46,6 @@ public:
         int size = 0;
         T *arr;
 
-        // Otwórz plik do odczytu
         ifstream inputFile(filename);
         if (!inputFile.is_open()) {
             cerr << "Nie mozna otworzyc pliku do odczytu." << endl;
@@ -93,7 +95,7 @@ public:
     }
 
     string getConfigFileType() {
-        ifstream inputFile("../config.txt");
+        ifstream inputFile("config.txt");
 
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
@@ -113,7 +115,7 @@ public:
     }
 
     int getConfigFileIterations() {
-        ifstream inputFile("../config.txt");
+        ifstream inputFile("config.txt");
 
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
@@ -143,7 +145,7 @@ public:
     }
 
     int *getConfigFileArraySize() {
-        ifstream inputFile("../config.txt");
+        ifstream inputFile("config.txt");
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: config.txt" << endl;
         }
@@ -184,7 +186,7 @@ public:
     }
 
     string getConfigFileAlgorithm() {
-        ifstream inputFile("../config.txt");
+        ifstream inputFile("config.txt");
 
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
@@ -204,7 +206,7 @@ public:
     }
 
     string getConfigFileArray() {
-        ifstream inputFile("../config.txt");
+        ifstream inputFile("config.txt");
 
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
