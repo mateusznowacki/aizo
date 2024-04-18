@@ -15,7 +15,7 @@ using namespace std;
 
 class DataGenerator {
 public:
-    DataGenerator(){
+    DataGenerator() {
 
     }
 

@@ -12,7 +12,7 @@ public:
     void printArray(T arr[], int size) {
         cout << "[";
         for (int i = 0; i < size; ++i) {
-            cout << fixed<<arr[i];
+            cout << fixed << arr[i];
             if (i < size - 1)
                 cout << ", ";
         }
@@ -125,27 +125,27 @@ public:
         cout << endl;
 
         switch (algorithm) {
-            case 1:{
+            case 1: {
                 cout << "Algorytm: Insertion sort" << endl;
                 break;
             }
-            case 2:{
+            case 2: {
                 cout << "Algorytm: Binary insertion sort" << endl;
                 break;
             }
-            case 3:{
+            case 3: {
                 cout << "Algorytm: Merge sort" << endl;
                 break;
             }
-            case 4:{
+            case 4: {
                 cout << "Algorytm: Bubble sort" << endl;
                 break;
             }
-            case 5:{
+            case 5: {
                 cout << "Algorytm: Heap sort" << endl;
                 break;
             }
-            case 6:{
+            case 6: {
                 cout << "Algorytm: Quick sort" << endl;
                 break;
             }

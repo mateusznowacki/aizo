@@ -11,16 +11,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 add_executable(aizo_sortowanie main.cpp
-        Algorithms.cpp
         Algorithms.h
-        DataGenerator.cpp
         DataGenerator.h
-        ConsoleManager.cpp
         ConsoleManager.h
-        Controller.cpp
         Controller.h
-        FileManager.cpp
         FileManager.h
-        AutoPerformanceTester.cpp
         AutoPerformanceTester.h
         )
