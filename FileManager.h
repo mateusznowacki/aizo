@@ -10,15 +10,16 @@ using namespace std;
 
 class FileManager {
 public:
+    // Metoda szablonowa do zapisu tablicy do pliku
     template<typename T>
     void saveArrayToFile(T *arr, int size) {
         string filename;
 
+        // Pobranie nazwy pliku od użytkownika
         cout << "Podaj nazwe pliku do ktorego chcesz zapisac tablice: " << endl;
         cin >> filename;
 
-        filename.append(".txt");
-        cout << filename << endl;
+        filename.append(".txt"); // Dodanie rozszerzenia .txt
 
         // Otwarcie pliku do zapisu
         ofstream outputFile(filename.c_str(), ofstream::trunc);
@@ -41,6 +42,7 @@ public:
         cout << "Tablica zostala zapisana do pliku " << endl;
     }
 
+    // Metoda szablonowa do wczytania tablicy z pliku
     template<typename T>
     T *getArrayFromFile(string filename) {
         int size = 0;
@@ -77,7 +79,7 @@ public:
         return arr;
     }
 
-
+    // Metoda do odczytu rozmiaru tablicy z pliku
     int getArraySizeFromFile(string filename) {
         int size = 0;
         // Otwórz plik do odczytu
@@ -94,16 +96,17 @@ public:
         return size;
     }
 
+    // Metoda do odczytu typu pliku konfiguracyjnego
     string getConfigFileType() {
         ifstream inputFile("config.txt");
-
+        // Obsługa błędu w przypadku nieudanego otwarcia pliku
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
         }
 
         string line;
         while (getline(inputFile, line)) {
-            // Sprawdź, czy linia zawiera "type:"
+            // Sprawdzenie, czy linia zawiera "type:"
             if (line.find("type:") != string::npos) {
                 // Znaleziono linię z "type:", zwróć wartość po dwukropku
                 size_t colonPos = line.find(":");
@@ -114,9 +117,10 @@ public:
         cerr << "Nie znaleziono linii z 'type:' w pliku: " << endl;
     }
 
+    // Metoda do odczytu liczby iteracji z pliku konfiguracyjnego
     int getConfigFileIterations() {
         ifstream inputFile("config.txt");
-
+        // Obsługa błędu w przypadku nieudanego otwarcia pliku
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
             return -1; // Zwróć -1 w przypadku błędu
@@ -124,7 +128,7 @@ public:
 
         string line;
         while (getline(inputFile, line)) {
-            // Sprawdź, czy linia zawiera "iterations:"
+            // Sprawdzenie, czy linia zawiera "iterations:"
             if (line.find("iterations:") != string::npos) {
                 // Znaleziono linię z "iterations:", zwróć wartość po dwukropku
                 size_t colonPos = line.find(":");
@@ -141,11 +145,12 @@ public:
         // Nie znaleziono linii z "iterations:"
         cerr << "Nie znaleziono linii z 'iterations:' w pliku: " << endl;
         return 0; // Zwróć 0 jeśli nie znaleziono
-
     }
 
+    // Metoda do odczytu rozmiaru tablic z pliku konfiguracyjnego
     int *getConfigFileArraySize() {
         ifstream inputFile("config.txt");
+        // Obsługa błędu w przypadku nieudanego otwarcia pliku
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: config.txt" << endl;
         }
@@ -185,52 +190,56 @@ public:
         return sizes;
     }
 
+    // Metoda do odczytu algorytmu z pliku konfiguracyjnego
     string getConfigFileAlgorithm() {
         ifstream inputFile("config.txt");
-
+        // Obsługa błędu w przypadku nieudanego otwarcia pliku
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
         }
 
         string line;
         while (getline(inputFile, line)) {
-            // Sprawdź, czy linia zawiera "type:"
+            // Sprawdź, czy linia zawiera "algorithm:"
             if (line.find("algorithm:") != string::npos) {
-                // Znaleziono linię z "type:", zwróć wartość po dwukropku
+                // Znaleziono linię z "algorithm:", zwróć wartość po dwukropku
                 size_t colonPos = line.find(":");
                 return line.substr(colonPos + 1);
             }
         }
-        // Nie znaleziono linii z "type:"
-        cerr << "Nie znaleziono linii z 'type:' w pliku: " << endl;
+        // Nie znaleziono linii z "algorithm:"
+        cerr << "Nie znaleziono linii z 'algorithm:' w pliku: " << endl;
     }
 
+    // Metoda do odczytu typu tablicy z pliku konfiguracyjnego
     string getConfigFileArray() {
         ifstream inputFile("config.txt");
-
+        // Obsługa błędu w przypadku nieudanego otwarcia pliku
         if (!inputFile.is_open()) {
             cerr << "Nie udało się otworzyć pliku: " << endl;
         }
 
         string line;
         while (getline(inputFile, line)) {
-            // Sprawdź, czy linia zawiera "type:"
+            // Sprawdź, czy linia zawiera "array:"
             if (line.find("array:") != string::npos) {
-                // Znaleziono linię z "type:", zwróć wartość po dwukropku
+                // Znaleziono linię z "array:", zwróć wartość po dwukropku
                 size_t colonPos = line.find(":");
                 return line.substr(colonPos + 1);
             }
         }
-        // Nie znaleziono linii z "type:"
-        cerr << "Nie znaleziono linii z 'type:' w pliku: " << endl;
+        // Nie znaleziono linii z "array:"
+        cerr << "Nie znaleziono linii z 'array:' w pliku: " << endl;
     }
 
+    // Metoda do zapisu wyniku czasu sortowania do pliku
     void
     saveResultToFile(chrono::duration<int64_t, ratio<1, 1000000000>> time, int algorithm, int arrayType, int size) {
         string filename;
         string algorithmName;
         string arrayTypeName;
 
+        // Określenie nazwy algorytmu
         switch (algorithm) {
             case 1:
                 algorithmName = "insertionSort";
@@ -252,6 +261,7 @@ public:
                 break;
         }
 
+        // Określenie nazwy typu tablicy
         switch (arrayType) {
             case 1:
                 arrayTypeName = "random";
@@ -265,6 +275,7 @@ public:
 
         }
 
+        // Określenie nazwy pliku na podstawie algorytmu, typu tablicy i rozmiaru
         filename = algorithmName + "_" + arrayTypeName + "_" + to_string(size) + ".txt";
 
         // Otwarcie pliku w trybie dopisywania
@@ -287,7 +298,6 @@ public:
 
         // Zamknięcie pliku
         file.close();
-
     }
 };
 

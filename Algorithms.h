@@ -9,13 +9,14 @@ public:
 
     }
 
+    // Sortowanie przez wstawianie
     template<typename T>
     T *insertionSort(T *arr, int size) {
         for (int i = 1; i < size; ++i) {
             T key = arr[i];
             int j = i - 1;
 
-            // Przesuń elementy tablicy większe od klucza o jeden w prawo
+            // Przesuwanie elementów większych od klucza o jedną pozycję w prawo
             while (j >= 0 && arr[j] > key) {
                 arr[j + 1] = arr[j];
                 j = j - 1;
@@ -25,33 +26,35 @@ public:
         return arr;
     }
 
+    // Sortowanie przez wstawianie binarne
     template<typename T>
     T *insertionSortBinary(T *arr, int size) {
         for (int i = 1; i < size; ++i) {
             T selected = arr[i];
             int loc = binarySearch(arr, selected, 0, i - 1);
 
-            // Move elements to make space for selected element
+            // Przesuwanie elementów w prawo, aby zrobić miejsce dla wybranego elementu
             for (int j = i - 1; j >= loc; --j)
                 arr[j + 1] = arr[j];
 
-            // Insert the selected element at its correct position
+            // Wstawianie wybranego elementu na właściwej pozycji
             arr[loc] = selected;
         }
         return arr;
     }
 
-
+    // Sortowanie przez scalanie
     template<typename T>
     T *mergeSort(T *arr, int size) {
         mergeSortHelper(arr, 0, size - 1);
         return arr;
     }
 
+    // Sortowanie bąbelkowe
     template<typename T>
     T *bubbleSort(T *arr, int size) {
         for (int i = 0; i < size - 1; ++i) {
-            // Flaga określająca, czy wystąpiła zamiana w tej iteracji
+            // Flaga wskazująca, czy wystąpiła zamiana w danej iteracji
             bool swapped = false;
 
             // Przechodzenie przez tablicę i zamiana sąsiednich elementów, jeśli są one w złej kolejności
@@ -74,41 +77,43 @@ public:
         return arr;
     }
 
-
+    // Sortowanie przez kopcowanie
     template<typename T>
     T *heapSort(T *arr, int size) {
-        // Budujemy kopiec (heapSortHelper) od końca tablicy
+        // Budowanie kopca od końca tablicy
         for (int i = size / 2 - 1; i >= 0; --i)
             heapSortHelper(arr, size, i);
 
-        // Sortowanie poprzez pobieranie maksymalnego elementu z kopca i umieszczanie go na końcu tablicy
+        // Sortowanie przez pobieranie maksymalnego elementu z kopca i umieszczanie go na końcu tablicy
         for (int i = size - 1; i > 0; --i) {
             swap(arr[0], arr[i]);  // Zamiana korzenia (maksymalnego elementu) z ostatnim elementem tablicy
             heapSortHelper(arr, i, 0);  // Przywracanie właściwości kopca w podtablicy [0, i-1]
         }
 
-        // Zwracamy posortowaną tablicę
+        // Zwracanie posortowanej tablicy
         return arr;
     }
 
+    // Sortowanie szybkie
     template<typename T>
     T *quickSort(T *arr, int size) {
         quickSortHelper(arr, 0, size - 1);
         return arr;
     }
 
+    // Sprawdzenie, czy tablica jest posortowana
     template<typename T>
     bool isSorted(const T arr[], int size) {
         for (int i = 0; i < size - 1; ++i) {
             if (arr[i] > arr[i + 1]) {
-                return false; // If any element is greater than the next one, array is not sorted
+                return false; // Jeśli którykolwiek element jest większy od następnego, tablica nie jest posortowana
             }
         }
-        return true; // If loop completes, array is sorted
+        return true; // Jeśli pętla zostanie zakończona, tablica jest posortowana
     }
 
-
 private:
+    // Scalanie dwóch posortowanych podtablic
     template<typename T>
     void merge(T *arr, int left, int middle, int right) {
         int n1 = middle - left + 1;
@@ -156,6 +161,7 @@ private:
         delete[] R;
     }
 
+    // Sortowanie przez scalanie (rekurencyjne)
     template<typename T>
     void mergeSortHelper(T *arr, int left, int right) {
         if (left < right) {
@@ -170,10 +176,10 @@ private:
         }
     }
 
-
+    // Pomocnicza funkcja dla sortowania przez kopcowanie
     template<typename T>
     void heapSortHelper(T arr[], int size, int index) {
-        int largest = index;  // Inicjalizujemy największy element jako korzeń
+        int largest = index;  // Inicjalizacja największego elementu jako korzenia
         int left = 2 * index + 1;  // Indeks lewego dziecka w kopcu
         int right = 2 * index + 2;  // Indeks prawego dziecka w kopcu
 
@@ -181,7 +187,7 @@ private:
         if (left < size && arr[left] > arr[largest])
             largest = left;
 
-        // Jeśli prawe dziecko jest większe od największego dotychczas elementu
+        // Jeśli prawe dziecko jest większe od największego elementu dotychczas
         if (right < size && arr[right] > arr[largest])
             largest = right;
 
@@ -189,11 +195,12 @@ private:
         if (largest != index) {
             swap(arr[index], arr[largest]);
 
-            // Rekurencyjnie wywołujemy heapSortHelper na nowym największym elemencie
+            // Rekurencyjne wywołanie heapSortHelper dla nowego największego elementu
             heapSortHelper(arr, size, largest);
         }
     }
 
+    // Pomocnicza funkcja do zamiany elementów
     template<typename T>
     void swap(T &a, T &b) {
         T temp = a;
@@ -201,9 +208,10 @@ private:
         b = temp;
     }
 
+    // Funkcja partition dla sortowania szybkiego
     template<typename T>
     int partition(T *arr, int low, int high) {
-        // Wybierz środkowy element jako pivot
+        // Wybieramy środkowy element jako pivot
         int middle = low + (high - low) / 2;
         swap(arr[middle], arr[high]);
 
@@ -220,7 +228,7 @@ private:
         return (i + 1);
     }
 
-
+    // Sortowanie szybkie (rekurencyjne)
     template<typename T>
     void quickSortHelper(T *arr, int low, int high) {
         if (low < high) {
@@ -231,6 +239,7 @@ private:
         }
     }
 
+    // Wyszukiwanie binarne
     template<typename T>
     int binarySearch(T arr[], T item, int low, int high) {
         if (high <= low)

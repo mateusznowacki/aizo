@@ -17,7 +17,9 @@ class AutoPerformanceTester {
     ConsoleManager console;
 
 public:
+    // Metoda do uruchamiania automatycznych testów wydajnościowych
     void runAutoTests() {
+        // Pobranie konfiguracji testów z pliku
         string type = fileManager.getConfigFileType();
         int iterations = fileManager.getConfigFileIterations();
         int *sizes = fileManager.getConfigFileArraySize();
@@ -25,8 +27,10 @@ public:
         int arrayType = stoi(fileManager.getConfigFileArray());
         auto time = chrono::steady_clock::duration::zero();
 
+        // Wyświetlenie konfiguracji testów
         console.printConfig(type, iterations, sizes, algorithm, arrayType);
 
+        // Wybór odpowiedniego typu danych i przeprowadzenie testów dla każdego przypadku
         if (type == "int") {
             for (int k = 1; k <= 3; ++k) {
                 for (int i = 0; i < 7; ++i) {
@@ -52,6 +56,7 @@ public:
                     delete[] array;
                 }
             }
+            //Analogicznie dla poniższych typów
         } else if (type == "float") {
             for (int k = 1; k <= 3; ++k) {
                 for (int i = 0; i < 7; ++i) {
