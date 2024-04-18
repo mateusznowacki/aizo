@@ -203,6 +203,10 @@ private:
 
     template<typename T>
     int partition(T *arr, int low, int high) {
+        // Wybierz środkowy element jako pivot
+        int middle = low + (high - low) / 2;
+        swap(arr[middle], arr[high]);
+
         T pivot = arr[high];
         int i = low - 1;
 
@@ -215,6 +219,7 @@ private:
         swap(arr[i + 1], arr[high]);
         return (i + 1);
     }
+
 
     template<typename T>
     void quickSortHelper(T *arr, int low, int high) {

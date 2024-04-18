@@ -278,7 +278,7 @@ public:
                 return;
             }
         }
-        auto duration_ms = chrono::duration_cast<chrono::milliseconds>(time);
+        auto duration_ms = chrono::duration_cast<chrono::microseconds>(time);
 
         // Zapisanie wyniku czasu do pliku
         file << duration_ms.count() << endl;

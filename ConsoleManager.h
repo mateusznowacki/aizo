@@ -152,17 +152,17 @@ public:
 
         }
 
-        switch (arrayType) {
-            case 1:
-                cout << "Tablica losowa" << endl;
-                break;
-            case 2:
-                cout << "Tablica 1/3 posortowana" << endl;
-                break;
-            case 3:
-                cout << "Tablica 2/3 posortowana" << endl;
-                break;
-        }
+//        switch (arrayType) {
+//            case 1:
+//                cout << "Tablica losowa" << endl;
+//                break;
+//            case 2:
+//                cout << "Tablica 1/3 posortowana" << endl;
+//                break;
+//            case 3:
+//                cout << "Tablica 2/3 posortowana" << endl;
+//                break;
+//        }
     }
 };
 

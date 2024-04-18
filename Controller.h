@@ -277,7 +277,7 @@ public:
                 break;
             }
         }
-        chrono::milliseconds duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+        chrono::microseconds duration = chrono::duration_cast<chrono::microseconds>(end - start);
         return duration; // Zwróć czas trwania sortowania
     }
 

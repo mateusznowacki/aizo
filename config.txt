@@ -1,14 +1,14 @@
-type:int
+type:float
 iterations:100
 algorithm:6
 array:1
-size:500000
-size:2000
-size:600
-size:6000
-size:7000
-size:9000
-size:10000
+size:50000
+size:100000
+size:150000
+size:200000
+size:250000
+size:300000
+size:350000
 
 -------------------
 dostepne typy
@@ -18,14 +18,16 @@ double
 char
 --------------------
 dostepne algorytmy
-1-insertion sort
-2-binary insertion sort
-3-merge sort
-4-bubble sort
-5-heap sort
-6-quick sort
+1-insertion sort n2
+2-binary insertion sort n2
+3-merge sort nlogn
+4-bubble sort n2
+5-heap sort nlogn
+6-quick sort nlogn
 --------------------
 dostepne rodzaje tablic
 1-random
 2-1/3 sorted
 3-2/3 sorted
+
+//quick dla posorotwnych z mniejszymi wartosciami
